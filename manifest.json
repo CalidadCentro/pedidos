@@ -1,0 +1,21 @@
+{
+  "short_name": "Menú Calidad",
+  "name": "Menú Digital Calidad",
+  "icons": [
+    {
+      "src": "favicon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "start_url": "./index.html",
+  "background_color": "#ffffff",
+  "theme_color": "#d63384",
+  "display": "standalone",
+  "orientation": "any"
+}
