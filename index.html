@@ -42,7 +42,7 @@ function imprimirComandaMesero() {
 
     document.body.classList.add('printing-ticket');
     setTimeout(() => {
-        imprimirSeguroHTML("print-ticket-pedido");
+        window.print();
         setTimeout(() => {
             document.body.classList.remove('printing-ticket');
         }, 1000);
@@ -87,7 +87,7 @@ function imprimirComandaMesero() {
 
     document.body.classList.add('printing-ticket');
     setTimeout(() => {
-        imprimirSeguroHTML("print-ticket-pedido");
+        window.print();
         setTimeout(() => {
             document.body.classList.remove('printing-ticket');
         }, 1000);
@@ -243,19 +243,56 @@ function imprimirComandaMesero() {
         .carta-qr-box img { width: 85px; height: 85px; border: 1px solid #000; padding: 2px; background: white; }
         .carta-qr-box span { display: block; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; margin-top: 3px; color: #000; }
 
-        #print-ticket-pedido { display: none; width: 80mm; padding: 5mm; font-family: 'Courier New', Courier, monospace; font-size: 14px; color: #000; background: #fff; margin: 0 auto; box-sizing: border-box; }
-        .tck-header { text-align: center; margin-bottom: 10px; font-weight: bold; background: transparent; }
-        .tck-line { border-bottom: 1px dashed #000; margin: 5px 0; }
-        .tck-item { display: flex; justify-content: space-between; margin-bottom: 3px; }
-        .tck-total { font-weight: bold; font-size: 1.2em; text-align: right; margin-top: 10px; }
+        #print-ticket-pedido{
+    display:none;
+    width:72mm;
+    padding:2mm;
+    margin:0;
+    box-sizing:border-box;
+    font-family:"Courier New", monospace;
+    font-size:18px;
+    line-height:1.35;
+    font-weight:bold;
+    color:#000;
+    background:#fff;
+}
+.tck-header{text-align:center;font-weight:bold;}
+.tck-line{border-bottom:1px dashed #000;margin:6px 0;}
+.tck-item{display:flex;justify-content:space-between;margin-bottom:3px;}
+.tck-total{font-size:22px;font-weight:bold;text-align:right;margin-top:8px;}
 
-        @media print {
-            @page { margin: 0; }
-            html, body { height: auto !important; min-height: auto !important; display: block !important; overflow: visible !important; background: #fff !important; }
-            #admin-panel, .nav-container, .top-controls, .admin-btns, #login-modal, #role-pass-modal, #product-modal, #cart-modal, #btn-flotante-carrito, footer, header, main, #modal-rol { display: none !important; }
-            body.printing-carta #print-carta-menu { display: block !important; visibility: visible !important; position: static !important; z-index: auto !important; padding: 10mm !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-            body.printing-ticket #print-ticket-pedido { display: block !important; visibility: visible !important; position: static !important; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
-        }
+@media print{
+    @page{size:80mm auto;margin:0;}
+    html,body{
+        width:80mm !important;
+        margin:0 !important;
+        padding:0 !important;
+        overflow:hidden !important;
+        background:#fff !important;
+    }
+    #admin-panel,.nav-container,.top-controls,.admin-btns,#login-modal,#role-pass-modal,#product-modal,#cart-modal,#btn-flotante-carrito,footer,header,main,#modal-rol{
+        display:none !important;
+    }
+    body.printing-carta #print-carta-menu{
+        display:block !important;
+        visibility:visible !important;
+    }
+    body.printing-ticket #print-ticket-pedido{
+        display:block !important;
+        position:absolute !important;
+        left:0 !important;
+        top:0 !important;
+        width:72mm !important;
+        margin:0 !important;
+        padding:2mm !important;
+        visibility:visible !important;
+        color:#000 !important;
+        background:#fff !important;
+        -webkit-print-color-adjust:exact;
+        print-color-adjust:exact;
+    }
+    body.printing-ticket{zoom:1 !important;}
+}
     </style>
 </head>
 <body>
@@ -351,9 +388,9 @@ function imprimirComandaMesero() {
     <div class="admin-section" style="background:#f4f6f9; border: 1px solid #d1d8e0; padding:15px; border-radius:15px;">
         <h3>🔒 Claves de Acceso</h3>
         <label>Clave para Mesero:</label>
-        <input type="text" id="adm-pass-mesero" placeholder="101010">
+        <input type="text" id="adm-pass-mesero" placeholder="1111">
         <label>Clave para Caja / Admin:</label>
-        <input type="text" id="adm-pass-caja" placeholder="010101">
+        <input type="text" id="adm-pass-caja" placeholder="1234">
         <button class="btn-save" onclick="actualizarConfig()" style="margin-top:10px; background:#2ecc71;">GUARDAR CLAVES</button>
     </div>
 
@@ -881,7 +918,7 @@ function imprimirComandaMesero() {
         
         document.body.classList.add('printing-ticket');
         setTimeout(() => {
-            imprimirSeguroHTML("print-ticket-pedido");
+            window.print();
             setTimeout(() => {
                 document.body.classList.remove('printing-ticket');
                 if(confirm("¿Cobrar mesa, guardar venta en el historial y cerrarla?")) {
@@ -953,7 +990,7 @@ function imprimirComandaMesero() {
         printContainer.innerHTML = tckHTML;
         document.body.classList.add('printing-ticket');
         setTimeout(() => { 
-            imprimirSeguroHTML("print-ticket-pedido"); 
+            window.print(); 
             setTimeout(() => { 
                 document.body.classList.remove('printing-ticket'); 
             }, 1000); 
@@ -1132,7 +1169,7 @@ function imprimirComandaMesero() {
 
     document.body.classList.add('printing-ticket');
     setTimeout(() => {
-        imprimirSeguroHTML("print-ticket-pedido");
+        window.print();
         setTimeout(() => {
             document.body.classList.remove('printing-ticket');
         }, 1000);
@@ -1140,65 +1177,5 @@ function imprimirComandaMesero() {
 }
 
 </script>
-
-<script>
-function imprimirSeguroHTML(idElemento) {
-    const contenido = document.getElementById(idElemento);
-
-    if (!contenido) {
-        imprimirSeguroHTML("print-ticket-pedido");
-        return;
-    }
-
-    const iframe = document.createElement('iframe');
-    iframe.style.position = 'fixed';
-    iframe.style.right = '0';
-    iframe.style.bottom = '0';
-    iframe.style.width = '0';
-    iframe.style.height = '0';
-    iframe.style.border = '0';
-
-    document.body.appendChild(iframe);
-
-    const doc = iframe.contentWindow.document;
-
-    doc.open();
-
-    doc.write(`
-        <!DOCTYPE html>
-        <html>
-        <head>
-            <title>Imprimir</title>
-            <style>
-                body{
-                    margin:0;
-                    padding:10px;
-                    font-family: Arial, sans-serif;
-                    background:#fff;
-                }
-            </style>
-        </head>
-        <body>
-            ${contenido.innerHTML}
-        </body>
-        </html>
-    `);
-
-    doc.close();
-
-    iframe.onload = function() {
-        setTimeout(() => {
-            iframe.contentWindow.focus();
-            iframe.contentWindow.print();
-
-            setTimeout(() => {
-                document.body.removeChild(iframe);
-            }, 1000);
-
-        }, 500);
-    };
-}
-</script>
-
 </body>
 </html>
